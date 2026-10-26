@@ -123,3 +123,16 @@ the devices. The footer credits Apple trademarks and links the artwork license.
 Review captures and temporary downloads live under `/tmp/cashpredict-site-review`
 and `/tmp/cashpredict-apple-frames`; they are not deployment output. The app checkout,
 normal financial store, existing stash and accepted App Store artwork are untouched.
+
+## Link-share thumbnail
+
+`img/social/cash-predict-v1.jpg` is the 1200×630 JPEG social card. It uses the
+site’s navy palette, original logo, hero message and genuine Cash Flow Forecast
+capture inside the unmodified official iPhone frame. The original UI and frame
+assets remain unchanged. Render `scripts/social-card.html` at exactly 1200×630
+and save a browser screenshot to reproduce the composition.
+
+Open Graph and X `summary_large_image` metadata point to the same absolute HTTPS
+image URL, with dimensions, MIME type and descriptive alt text. The canonical
+URL remains `https://cashpredict.app/`. Use a new versioned image filename when
+changing the artwork; sharing services may retain older cached previews.

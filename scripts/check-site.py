@@ -11,10 +11,17 @@ class Page(HTMLParser):
         super().__init__(convert_charrefs=True)
         self.path,self.ids,self.refs,self.images=path,set(),[],[]
         self.schemas,self.script,self.h1_count=[],None,0
+        self.metadata,self.canonicals={},[]
         self.text,self.devices,self.divs=[],[],[]
         self.feed(path.read_text())
     def handle_starttag(self,tag,attrs):
         attrs=dict(attrs)
+        if tag=='meta':
+            key=attrs.get('property') or attrs.get('name')
+            if key and (key.startswith('og:') or key.startswith('twitter:')):
+                assert key not in self.metadata,f'Duplicate social tag: {key}'
+                self.metadata[key]=attrs.get('content','')
+        if tag=='link' and attrs.get('rel')=='canonical':self.canonicals.append(attrs.get('href'))
         if 'id' in attrs:
             assert attrs['id'] not in self.ids,f'Duplicate id: {self.path} {attrs["id"]}'
             self.ids.add(attrs['id'])
@@ -43,7 +50,7 @@ class Page(HTMLParser):
             self.schemas.append(json.loads(self.script));self.script=None
 
 main_path=ROOT/'index.html'
-paths=[main_path]
+paths=[main_path,ROOT/'scripts/social-card.html']
 if '--include-previews' in sys.argv:
     paths += [ROOT/'previews/system/index.html',ROOT/'previews/system/light.html',ROOT/'previews/system/dark.html',*[ROOT/f'previews/{d}/index.html' for d in ['dark','light','editorial']]]
 pages={p:Page(p) for p in paths}
@@ -111,5 +118,18 @@ assert '@media(prefers-color-scheme:dark)' in css
 assert 'color-scheme:light dark' in css
 assert not any(effect in css for effect in ['object-fit:cover','transform:','box-shadow:','clip-path:','filter:'])
 assert 'max-width:none' in css and 'height:auto' in css
+assert page.canonicals==['https://cashpredict.app/'],'One HTTPS canonical required'
+meta=page.metadata
+assert meta['og:url']==page.canonicals[0]
+assert meta['og:type']=='website' and meta['og:site_name']=='Cash Predict'
+assert meta['twitter:card']=='summary_large_image'
+image_url='https://cashpredict.app/img/social/cash-predict-v1.jpg'
+assert meta['og:image']==meta['twitter:image']==image_url
+assert meta['og:image:type']=='image/jpeg'
+assert (meta['og:image:width'],meta['og:image:height'])==('1200','630')
+assert meta['og:image:alt']==meta['twitter:image:alt'] and len(meta['og:image:alt'])>30
+for field in ['title','description']:assert meta['og:'+field]==meta['twitter:'+field]
+image=(ROOT/urlsplit(image_url).path.lstrip('/')).read_bytes()
+assert image.startswith(b'\xff\xd8') and len(image)<5*1024*1024,'JPEG social card under 5 MB'
 assert (ROOT/'CNAME').read_text().strip()=='cashpredict.app'
-print('PASS: selected system-appearance site; seven full native captures with matching original Apple frames; original hashes, aspect ratios, links, anchors, schema, message, license and Pages CNAME.')
+print('PASS: selected system-appearance site; seven full native captures with matching original Apple frames; original hashes, aspect ratios, links, anchors, schema, message, license, unique social metadata, JPEG share artwork and Pages CNAME.')

@@ -1,0 +1,73 @@
+{
+  "app_version": "27.0.4",
+  "app_commit": "5fca70cee1a9ae1d90065da37b800a8d41daa78a + local DEBUG demo amount/payment/settings changes",
+  "captured_at": "2026-10-26",
+  "runtime": "iOS / iPadOS 27.2",
+  "data": "Fictional existing DEBUG onboarding records: USD 60,000 gross annual salary; illustrative 80% take-home, USD 1,846.15 biweekly. Original four accounts and sixteen recurrences retained. Payments recorded through 2026-10-26 by TransactionHelper, with future occurrences remaining. Separate unsynced demo Realm; no private finances.",
+  "pixels": "Native full-screen PNGs copied without cropping, compositing, retouching or UI reconstruction.",
+  "images": [
+    {
+      "file": "img/current/dashboard.png",
+      "device": "iPhone 18 Pro",
+      "width": 1206,
+      "height": 2622,
+      "sha256": "37c9494f534b69f8838114eccac090375281ba8010811d92b339a6d0c3d44e65",
+      "method": "Scripts/run-app.sh --capture-store-demo --capture-test testWebsiteScreensCapture"
+    },
+    {
+      "file": "img/current/cash-flow.png",
+      "device": "iPhone 18 Pro",
+      "width": 1206,
+      "height": 2622,
+      "sha256": "288b84555e501e8796c7164c70aa22117e79ff7f9bfb59639290e1dd2d71a595",
+      "method": "Scripts/run-app.sh --capture-store-demo --capture-test testWebsiteScreensCapture"
+    },
+    {
+      "file": "img/current/payments.png",
+      "device": "iPhone 18 Pro",
+      "width": 1206,
+      "height": 2622,
+      "sha256": "ca42d87be0c2623f469c9a54587eb2d0615225916715bf8a48e505c8390cf81b",
+      "method": "Scripts/run-app.sh --capture-store-demo --capture-test testWebsiteScreensCapture"
+    },
+    {
+      "file": "img/current/recurrent.png",
+      "device": "iPhone 18 Pro",
+      "width": 1206,
+      "height": 2622,
+      "sha256": "b66d0c3ca8da01ec3ecabead5697df2b292c124cff42bbd3b71e1df2098ef7a1",
+      "method": "Scripts/run-app.sh --capture-store-demo --capture-test testWebsiteScreensCapture"
+    },
+    {
+      "file": "img/current/goals.png",
+      "device": "iPhone 18 Pro",
+      "width": 1206,
+      "height": 2622,
+      "sha256": "a6813ece5af39e091e6f8c8224d0f6dbe4b683c820a0aa3bf8efe92fbe01baf2",
+      "method": "Scripts/run-app.sh --capture-store-demo --capture-test testWebsiteScreensCapture"
+    },
+    {
+      "file": "img/current/outlook.png",
+      "device": "iPhone 18 Pro",
+      "width": 1206,
+      "height": 2622,
+      "sha256": "475faf5ea8913533e04f7ee300a14a46977f91b23803845c69d080a5de042a09",
+      "method": "Scripts/run-app.sh --capture-store-demo --capture-test testWebsiteScreensCapture"
+    },
+    {
+      "file": "img/current/ipad.png",
+      "device": "iPad (A16), disposable Cash Predict Website 60k",
+      "width": 1640,
+      "height": 2360,
+      "sha256": "58b3c959d58de4e1d68888461ebdf4b192412e7918a11cf8b7fec19e205b85d8",
+      "method": "Scripts/run-app.sh --capture-store-demo --capture-test testWebsiteScreensCapture",
+      "note": "Landscape capture; screenshot-only Financial Insights dismissal for clean card alignment. PNG orientation metadata retained."
+    }
+  ],
+  "settings": {
+    "chart_values": true,
+    "currency_display": "symbol only",
+    "locale": "en_US"
+  },
+  "onboarding": "Normal onboarding completion path on a clean disposable iPad (A16); fresh isolated demo store on iPhone 18 Pro. No optional loan or goal-contribution records."
+}

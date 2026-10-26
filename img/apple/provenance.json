@@ -1,0 +1,44 @@
+{
+  "source": "https://developer.apple.com/design/resources/#product-bezels",
+  "guidelines": "https://developer.apple.com/app-store/marketing/guidelines/",
+  "license": "Apple Design Resources LYL142, 06/21/2023",
+  "approval_quote": "Yes, accept the Apple resource license",
+  "downloaded": "2026-10-26",
+  "artwork": "Original Apple PNGs copied byte-for-byte. No artwork transformation, shadow, perspective, tilt or crop. CSS places original full app screenshots behind the original transparent screen openings. Licensed artwork is not a standalone clip-art distribution.",
+  "assets": [
+    {
+      "file": "iphone-18-pro-black-portrait.png",
+      "url": "https://devimages-cdn.apple.com/design/resources/download/Bezel-iPhone-18.dmg",
+      "model": "iPhone 18 Pro",
+      "orientation": "portrait",
+      "canvas": [
+        1350,
+        2760
+      ],
+      "screen": [
+        72,
+        69,
+        1206,
+        2622
+      ],
+      "sha256": "cb7b20a551c4fd63e794e1dd08ab0096816a12e72d38503f36a242550f07264c"
+    },
+    {
+      "file": "ipad-a16-silver-landscape.png",
+      "url": "https://devimages-cdn.apple.com/design/resources/download/Bezel-iPad-(A16).dmg",
+      "model": "iPad (A16)",
+      "orientation": "landscape",
+      "canvas": [
+        2760,
+        2040
+      ],
+      "screen": [
+        200,
+        200,
+        2360,
+        1640
+      ],
+      "sha256": "d1dcd0d4cc31d9fbe91692ae82f9a324c267f5cdbfa93b7b5b472f6f6859e843"
+    }
+  ]
+}

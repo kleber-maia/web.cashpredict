@@ -163,3 +163,5 @@ for bot in ['Googlebot','Bingbot','OAI-SearchBot']:
 assert not robots.can_fetch('GPTBot','https://cashpredict.app/')
 assert robots.site_maps()==['https://cashpredict.app/sitemap.xml']
 print('PASS: search/ChatGPT crawl policy, sitemap, descriptive metadata, free and annual pricing, analytics disclosure, reduced-motion and artwork motion boundaries.')
+
+assert 'html:not(.js) .site-header{position:static}' in css, 'No-script mobile navigation must not cover anchors'

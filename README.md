@@ -138,7 +138,7 @@ URL remains `https://cashpredict.app/`. Use a new versioned image filename when
 changing the artwork; sharing services may retain older cached previews.
 
 
-## November 2026 refresh (local review, not published)
+## November 2026 refresh
 
 The new direction uses larger editorial typography, violet emphasis, rounded feature
 and pricing panels, a sticky navigation, and a decorative forward-flow timeline.
@@ -157,8 +157,15 @@ No third-party scripts, fonts, analytics or client storage were added.
 
 Run `python3 scripts/check-site.py`, `node --check assets/js/site.js`, and
 `node scripts/check-interactions.cjs`. The latter is a deterministic DOM-stub unit
-test, not a browser test. Source checks and all unit tests passed. Actual desktop,
-mobile, light/dark, reduced-motion and no-JavaScript browser rendering remain
-unverified: the browser tool reports that local browser use is disabled in Work
-settings. The loopback preview is http://127.0.0.1:8765/. Publication is pending
-current user approval; the October approval does not authorize this new design.
+test, not a browser test. Source checks and all unit tests passed. Chrome visual QA on the Mac mini verified
+1200px desktop light, native desktop dark, 400px mobile light/dark, and 320px
+mobile light. Menu reopening, Escape/focus, pricing navigation and repeated
+same-hash privacy disclosure were exercised. DevTools reduced-motion emulation
+activated the animation/transition suppression rules. A no-JavaScript reload
+confirmed accessible navigation and native FAQ behavior. The expanded mobile
+no-script header is static so it cannot obscure anchor targets; this was corrected
+and visually rechecked. Chrome emulation is not a substitute for physical-device
+Safari testing. The loopback preview remains http://127.0.0.1:8765/.
+
+Review screenshots are local artifacts under `/tmp/cashpredict-review-nov08/` and
+are not production files. Existing master/root GitHub Pages publishing is retained.

@@ -4,6 +4,8 @@ from pathlib import Path
 from html.parser import HTMLParser
 from urllib.parse import urlsplit, unquote
 import hashlib,json,struct,re,sys
+import xml.etree.ElementTree as ET
+from urllib.robotparser import RobotFileParser
 
 ROOT=Path(__file__).resolve().parents[1]
 class Page(HTMLParser):
@@ -116,7 +118,15 @@ for dest in ['https://apps.apple.com/app/apple-store/id6444193844?pt=119005924&c
 css=(ROOT/'assets/css/custom.css').read_text()
 assert '@media(prefers-color-scheme:dark)' in css
 assert 'color-scheme:light dark' in css
-assert not any(effect in css for effect in ['object-fit:cover','transform:','box-shadow:','clip-path:','filter:'])
+assert not any(effect in css for effect in ['object-fit:cover','box-shadow:','clip-path:','filter:'])
+# Motion belongs only to the decorative line and copy reveal, never Apple artwork.
+for selectors, declarations in re.findall(r'([^{}]+)\{([^{}]*)\}', css):
+    if any(effect in declarations for effect in ['animation:', 'transform:']):
+        assert all(selector.strip() in ['.flow-line::after', '.flow-line:nth-of-type(4)::after', '.reveal-in', 'from', 'to', '*', '*::before', '*::after'] for selector in selectors.split(',')), f'Unexpected motion target: {selectors}'
+js=(ROOT/'assets/js/site.js').read_text()
+assert "'.hero-copy, .section-copy, .manifesto h2, .section-heading, .principles article, .price-card'" in js
+assert 'prefers-reduced-motion: reduce' in js
+assert 'prefers-reduced-motion:reduce' in css
 assert 'max-width:none' in css and 'height:auto' in css
 assert page.canonicals==['https://cashpredict.app/'],'One HTTPS canonical required'
 meta=page.metadata
@@ -133,3 +143,23 @@ image=(ROOT/urlsplit(image_url).path.lstrip('/')).read_bytes()
 assert image.startswith(b'\xff\xd8') and len(image)<5*1024*1024,'JPEG social card under 5 MB'
 assert (ROOT/'CNAME').read_text().strip()=='cashpredict.app'
 print('PASS: selected system-appearance site; seven full native captures with matching original Apple frames; original hashes, aspect ratios, links, anchors, schema, message, license, unique social metadata, JPEG share artwork and Pages CNAME.')
+
+# Discoverability is crawl access and useful facts, not a ranking guarantee.
+assert '<title>Cash Predict | Cash Flow Forecast App for iPhone &amp; iPad</title>' in html or '<title>Cash Predict | Cash Flow Forecast App for iPhone & iPad</title>' in html
+assert '$20' in text and 'year' in text
+assert page.schemas[0]['offers'][0]['price']=='0'
+assert page.schemas[0]['offers'][1]['price']=='20'
+assert page.schemas[0]['offers'][1]['priceCurrency']=='USD'
+assert page.schemas[0]['offers'][1]['priceSpecification']['unitText']=='year'
+assert 'analytics may include aggregate cash, savings, credit and debt balances' in text
+assert 'does not move money at your bank' in text
+sitemap=ET.fromstring((ROOT/'sitemap.xml').read_text())
+assert [el.text for el in sitemap.findall('{*}url/{*}loc')]==['https://cashpredict.app/']
+robots=RobotFileParser();robots.parse((ROOT/'robots.txt').read_text().splitlines())
+for bot in ['Googlebot','Bingbot','OAI-SearchBot']:
+    assert robots.can_fetch(bot,'https://cashpredict.app/')
+    assert robots.can_fetch(bot,'https://cashpredict.app/assets/css/custom.css')
+    assert not robots.can_fetch(bot,'https://cashpredict.app/private/')
+assert not robots.can_fetch('GPTBot','https://cashpredict.app/')
+assert robots.site_maps()==['https://cashpredict.app/sitemap.xml']
+print('PASS: search/ChatGPT crawl policy, sitemap, descriptive metadata, free and annual pricing, analytics disclosure, reduced-motion and artwork motion boundaries.')

@@ -8,7 +8,7 @@ is added to the website. Editorial is an archived exploration, not the selected 
 
 ## Source and hosting
 
-- Checkout: `/Users/klebermaia/Projects/Web/cashpredict`.
+- Checkout: `/Users/klebermaia/Projects/web.cashpredict`.
 - Repository: `git@github.com:kleber-maia/web.cashpredict.git`.
 - GitHub Pages API verified on 2026-10-26: legacy publishing from `master`, `/`,
   custom domain `cashpredict.app`; baseline `78106758f647c1094b6a8456ac1026e43ef8b54c`.
@@ -57,7 +57,7 @@ no-micromanagement philosophy, App Store destination, support and blog are prese
 Website text is navy/charcoal in light mode and white in dark mode; green remains
 only within genuine app UI. The logo and official App Store badge follow the system
 appearance too. Design dials: variance 7, motion 2, density 3; native CSS evolves the
-existing static site, with a uniform whole-page palette and restrained interaction.
+existing static site with an editorial layout and system light/dark palettes.
 
 Current app evidence is version 27.0.4, commit
 `5fca70cee1a9ae1d90065da37b800a8d41daa78a` in `kleber-maia/cash-predict`:
@@ -136,3 +136,29 @@ Open Graph and X `summary_large_image` metadata point to the same absolute HTTPS
 image URL, with dimensions, MIME type and descriptive alt text. The canonical
 URL remains `https://cashpredict.app/`. Use a new versioned image filename when
 changing the artwork; sharing services may retain older cached previews.
+
+
+## November 2026 refresh (local review, not published)
+
+The new direction uses larger editorial typography, violet emphasis, rounded feature
+and pricing panels, a sticky navigation, and a decorative forward-flow timeline.
+Timeline motion ends within five seconds; copy/cards reveal once on entry. Neither
+devices nor ancestors containing devices are animated. Content is visible before
+JavaScript and remains visible if enhancement fails. System reduced-motion disables
+all motion, including if that system preference changes while the page is open.
+The navigation works without JavaScript; native FAQ disclosures remain accessible.
+
+Cash Predict is free with ads; Plus is $20 USD/year to remove ads. Visible pricing
+and MobileApplication offers agree. Existing analytics caveats and legal PDFs are
+preserved. Descriptive metadata, crawlable product copy, an XML sitemap, and explicit
+OAI-SearchBot access improve eligibility for search discovery. GPTBot is blocked.
+Crawl access does not guarantee indexing, ranking or a ChatGPT recommendation.
+No third-party scripts, fonts, analytics or client storage were added.
+
+Run `python3 scripts/check-site.py`, `node --check assets/js/site.js`, and
+`node scripts/check-interactions.cjs`. The latter is a deterministic DOM-stub unit
+test, not a browser test. Source checks and all unit tests passed. Actual desktop,
+mobile, light/dark, reduced-motion and no-JavaScript browser rendering remain
+unverified: the browser tool reports that local browser use is disabled in Work
+settings. The loopback preview is http://127.0.0.1:8765/. Publication is pending
+current user approval; the October approval does not authorize this new design.
